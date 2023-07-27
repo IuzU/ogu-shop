@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bled OGU</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <!-- Font Awesome CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .header-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 1s;
+    }
+
+    .header-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #FFFFFF;
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s;
+    }
+
+    .price-label {
+      font-size: 0.875rem;
+      color: #9CA3AF;
+    }
+
+    .price {
+      font-size: 1.125rem;
+      color: #FFFFFF;
+    }
+
+    .card-bg {
+      background-color: #1F2937;
+    }
+
+    /* Custom animation classes */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Footer styles */
+    .footer {
+      background-color: #1F2937;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .footer p {
+      color: #9CA3AF;
+      font-size: 0.875rem;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+  <!-- Header -->
+  <div class="py-8 bg-gray-800 header-container">
+    <h1 class="header-title">Usernames</h1>
+    <a href="https://t.me/shinier" class="mt-2 text-white animate-fadeIn">
+      <i class="fab fa-telegram text-3xl"></i>
+    </a>
+  </div> 
+
+  <!-- Usernames for Sale -->
+  <div class="container mx-auto py-8 m-2">
+    <h2 class="text-3xl font-bold text-center mb-8 animate-fadeInUp">Replit</h2>
+
+    <div id="usernamesContainer" class="p-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- Cards will be dynamically added here -->
+    </div>
+  </div>
+
+  <script>
+  // Fetch data from usernames.json and create cards dynamically
+  fetch('usernames.json')
+    .then(response => response.json())
+    .then(data => {
+      const container = document.getElementById('usernamesContainer');
+
+      data.forEach(user => {
+        const card = document.createElement('div');
+        card.className = 'bg-card-bg rounded-lg border border-gray-700 shadow-lg p-6 animate-fadeInUp';
+
+        const title = document.createElement('h2');
+        title.className = 'text-xl font-bold mb-4 animate-fadeIn';
+        title.textContent = user.username;
+
+        const priceLabel = document.createElement('p');
+        priceLabel.className = 'price-label animate-fadeIn';
+        priceLabel.textContent = 'Price';
+
+        const price = document.createElement('p');
+        price.className = 'price animate-fadeIn';
+        price.textContent = `$${user.price}`;
+
+        const purchaseButton = document.createElement('a'); // Change button to anchor element
+        purchaseButton.className = 'block-purchase-button bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg font-bold mt-4 animate-slideInRight';
+        purchaseButton.textContent = 'Purchase';
+        purchaseButton.href = user.url; // Set the URL for the button
+
+        card.appendChild(title);
+        card.appendChild(priceLabel);
+        card.appendChild(price);
+        card.appendChild(purchaseButton);
+
+        container.appendChild(card);
+      });
+    })
+    .catch(error => console.error('Error fetching data:', error)); 
+</script>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>© 2023 Bled FLIPD. All rights reserved.</p>
+  </div>
+</body>
+
+</html>
