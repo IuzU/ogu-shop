@@ -1,0 +1,17 @@
+[
+  {
+    "username": "Username 1",
+    "price": "19.99",
+    "url": "https://example.com/username1"
+  },
+  {
+    "username": "Username 2",
+    "price": "24.99",
+    "url": "https://example.com/username2"
+  },
+  {
+    "username": "Username 3",
+    "price": "14.99",
+    "url": "https://example.com/username3"
+  }
+]
